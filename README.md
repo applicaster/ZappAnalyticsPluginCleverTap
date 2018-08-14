@@ -1,2 +1,2 @@
-# ZappAnalyticsPluginCleverTap-iOS
+# ZappAnalyticsPluginCleverTap
 clever tap login plugin
