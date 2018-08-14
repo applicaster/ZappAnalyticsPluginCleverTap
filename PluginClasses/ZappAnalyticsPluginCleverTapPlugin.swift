@@ -9,6 +9,7 @@
 import Foundation
 import ZappPlugins
 import ApplicasterSDK
+import CleverTapSDK
 
 /**
 This Template contains protocol methods to be implemented according to your needs.
