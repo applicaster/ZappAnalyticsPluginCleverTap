@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		232BD991212308A900EAF6AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD990212308A900EAF6AC /* AppDelegate.swift */; };
+		232BD994212308A900EAF6AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232BD992212308A900EAF6AC /* Main.storyboard */; };
+		232BD99B212308A900EAF6AC /* plugin_configurations.json in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99A212308A900EAF6AC /* plugin_configurations.json */; };
+		232BD99E212308AA00EAF6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99D212308AA00EAF6AC /* Assets.xcassets */; };
+		232BD9A1212308AA00EAF6AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99F212308AA00EAF6AC /* LaunchScreen.storyboard */; };
+		232BD9AC212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		232BD9A8212308AA00EAF6AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 232BD985212308A900EAF6AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 232BD98C212308A900EAF6AC;
+			remoteInfo = ZappAnalyticsPluginCleverTap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		232BD98D212308A900EAF6AC /* ZappAnalyticsPluginCleverTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZappAnalyticsPluginCleverTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		232BD990212308A900EAF6AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		232BD993212308A900EAF6AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		232BD996212308A900EAF6AC /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		232BD997212308A900EAF6AC /* ZappAnalyticsPluginCleverTap.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZappAnalyticsPluginCleverTap.podspec; sourceTree = SOURCE_ROOT; };
+		232BD999212308A900EAF6AC /* ZappAnalyticsPluginCleverTapPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZappAnalyticsPluginCleverTapPlugin.swift; path = ../PluginClasses/ZappAnalyticsPluginCleverTapPlugin.swift; sourceTree = "<group>"; };
+		232BD99A212308A900EAF6AC /* plugin_configurations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plugin_configurations.json; sourceTree = "<group>"; };
+		232BD99C212308A900EAF6AC /* plugin_manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plugin_manifest.json; sourceTree = "<group>"; };
+		232BD99D212308AA00EAF6AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		232BD9A0212308AA00EAF6AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		232BD9A2212308AA00EAF6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		232BD9A7212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZappAnalyticsPluginCleverTapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappAnalyticsPluginCleverTapTests.swift; sourceTree = "<group>"; };
+		232BD9AD212308AA00EAF6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		232BD98A212308A900EAF6AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		232BD9A4212308AA00EAF6AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		232BD984212308A900EAF6AC = {
+			isa = PBXGroup;
+			children = (
+				232BD98F212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */,
+				232BD9AA212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests */,
+				232BD98E212308A900EAF6AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		232BD98E212308A900EAF6AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				232BD98D212308A900EAF6AC /* ZappAnalyticsPluginCleverTap.app */,
+				232BD9A7212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		232BD98F212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */ = {
+			isa = PBXGroup;
+			children = (
+				232BD990212308A900EAF6AC /* AppDelegate.swift */,
+				232BD992212308A900EAF6AC /* Main.storyboard */,
+				232BD99D212308AA00EAF6AC /* Assets.xcassets */,
+				232BD99F212308AA00EAF6AC /* LaunchScreen.storyboard */,
+				232BD9A2212308AA00EAF6AC /* Info.plist */,
+				232BD995212308A900EAF6AC /* Zapp-Resources */,
+				232BD998212308A900EAF6AC /* PluginClasses */,
+			);
+			path = ZappAnalyticsPluginCleverTap;
+			sourceTree = "<group>";
+		};
+		232BD995212308A900EAF6AC /* Zapp-Resources */ = {
+			isa = PBXGroup;
+			children = (
+				232BD996212308A900EAF6AC /* Podfile */,
+				232BD997212308A900EAF6AC /* ZappAnalyticsPluginCleverTap.podspec */,
+				232BD99A212308A900EAF6AC /* plugin_configurations.json */,
+				232BD99C212308A900EAF6AC /* plugin_manifest.json */,
+			);
+			name = "Zapp-Resources";
+			sourceTree = "<group>";
+		};
+		232BD998212308A900EAF6AC /* PluginClasses */ = {
+			isa = PBXGroup;
+			children = (
+				232BD999212308A900EAF6AC /* ZappAnalyticsPluginCleverTapPlugin.swift */,
+			);
+			name = PluginClasses;
+			sourceTree = "<group>";
+		};
+		232BD9AA212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests */ = {
+			isa = PBXGroup;
+			children = (
+				232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */,
+				232BD9AD212308AA00EAF6AC /* Info.plist */,
+			);
+			path = ZappAnalyticsPluginCleverTapTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		232BD98C212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 232BD9B0212308AA00EAF6AC /* Build configuration list for PBXNativeTarget "ZappAnalyticsPluginCleverTap" */;
+			buildPhases = (
+				232BD989212308A900EAF6AC /* Sources */,
+				232BD98A212308A900EAF6AC /* Frameworks */,
+				232BD98B212308A900EAF6AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZappAnalyticsPluginCleverTap;
+			productName = ZappAnalyticsPluginCleverTap;
+			productReference = 232BD98D212308A900EAF6AC /* ZappAnalyticsPluginCleverTap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		232BD9A6212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 232BD9B3212308AA00EAF6AC /* Build configuration list for PBXNativeTarget "ZappAnalyticsPluginCleverTapTests" */;
+			buildPhases = (
+				232BD9A3212308AA00EAF6AC /* Sources */,
+				232BD9A4212308AA00EAF6AC /* Frameworks */,
+				232BD9A5212308AA00EAF6AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				232BD9A9212308AA00EAF6AC /* PBXTargetDependency */,
+			);
+			name = ZappAnalyticsPluginCleverTapTests;
+			productName = ZappAnalyticsPluginCleverTapTests;
+			productReference = 232BD9A7212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		232BD985212308A900EAF6AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = applicaster;
+				TargetAttributes = {
+					232BD98C212308A900EAF6AC = {
+						CreatedOnToolsVersion = 9.4;
+					};
+					232BD9A6212308AA00EAF6AC = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 232BD98C212308A900EAF6AC;
+					};
+				};
+			};
+			buildConfigurationList = 232BD988212308A900EAF6AC /* Build configuration list for PBXProject "ZappAnalyticsPluginCleverTap" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 232BD984212308A900EAF6AC;
+			productRefGroup = 232BD98E212308A900EAF6AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				232BD98C212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */,
+				232BD9A6212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		232BD98B212308A900EAF6AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232BD994212308A900EAF6AC /* Main.storyboard in Resources */,
+				232BD9A1212308AA00EAF6AC /* LaunchScreen.storyboard in Resources */,
+				232BD99E212308AA00EAF6AC /* Assets.xcassets in Resources */,
+				232BD99B212308A900EAF6AC /* plugin_configurations.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		232BD9A5212308AA00EAF6AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		232BD989212308A900EAF6AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232BD991212308A900EAF6AC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		232BD9A3212308AA00EAF6AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232BD9AC212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		232BD9A9212308AA00EAF6AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 232BD98C212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */;
+			targetProxy = 232BD9A8212308AA00EAF6AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		232BD992212308A900EAF6AC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				232BD993212308A900EAF6AC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		232BD99F212308AA00EAF6AC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				232BD9A0212308AA00EAF6AC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		232BD9AE212308AA00EAF6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		232BD9AF212308AA00EAF6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		232BD9B1212308AA00EAF6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ZappAnalyticsPluginCleverTap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.applicaster.ZappAnalyticsPluginCleverTap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		232BD9B2212308AA00EAF6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ZappAnalyticsPluginCleverTap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.applicaster.ZappAnalyticsPluginCleverTap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		232BD9B4212308AA00EAF6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ZappAnalyticsPluginCleverTapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.applicaster.ZappAnalyticsPluginCleverTapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZappAnalyticsPluginCleverTap.app/ZappAnalyticsPluginCleverTap";
+			};
+			name = Debug;
+		};
+		232BD9B5212308AA00EAF6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ZappAnalyticsPluginCleverTapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.applicaster.ZappAnalyticsPluginCleverTapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZappAnalyticsPluginCleverTap.app/ZappAnalyticsPluginCleverTap";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		232BD988212308A900EAF6AC /* Build configuration list for PBXProject "ZappAnalyticsPluginCleverTap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				232BD9AE212308AA00EAF6AC /* Debug */,
+				232BD9AF212308AA00EAF6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		232BD9B0212308AA00EAF6AC /* Build configuration list for PBXNativeTarget "ZappAnalyticsPluginCleverTap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				232BD9B1212308AA00EAF6AC /* Debug */,
+				232BD9B2212308AA00EAF6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		232BD9B3212308AA00EAF6AC /* Build configuration list for PBXNativeTarget "ZappAnalyticsPluginCleverTapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				232BD9B4212308AA00EAF6AC /* Debug */,
+				232BD9B5212308AA00EAF6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 232BD985212308A900EAF6AC /* Project object */;
+}

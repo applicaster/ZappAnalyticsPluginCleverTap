@@ -1,0 +1,21 @@
+[{
+	"plugin": {
+		"api": {
+			"class_name": "ZappAnalyticsPluginCleverTap.ZappAnalyticsPluginCleverTapPlugin"
+		},
+		"author_name": "Roi Kedarya",
+		"author_email": "Roi Kedarya",
+		"manifest_version": "0.0.1",
+		"name": "ZappAnalyticsPluginCleverTap",
+		"description": "CleverTap Analytics Plugin",
+		"identifier": "clevertap_analytics",
+		"type": "analytics",
+		"platform": "ios",
+		"min_zapp_sdk": "7.0.0",
+		"whitelisted_account_ids": [],
+		"dependency_repository_url": [],
+		"dependency_name": "",
+		"dependency_version": ""
+	},
+	"configuration_json": {}
+}]
