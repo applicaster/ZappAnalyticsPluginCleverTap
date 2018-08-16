@@ -17,7 +17,7 @@ Some of the methods can be removed if they are not relevant for your implementat
 You can also add methods from the protocol, for more information about the available methods, please check ZPAnalyticsProviderProtocol under ZappPlugins.
 **/
 
-public class CleverTapAnalyticsPlugin: ZPAnalyticsProvider {
+public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     
     var cleverTap:CleverTap?
     var timedEventDictionary: NSMutableDictionary?
