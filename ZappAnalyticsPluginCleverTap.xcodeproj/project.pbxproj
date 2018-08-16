@@ -13,6 +13,7 @@
 		232BD99E212308AA00EAF6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99D212308AA00EAF6AC /* Assets.xcassets */; };
 		232BD9A1212308AA00EAF6AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99F212308AA00EAF6AC /* LaunchScreen.storyboard */; };
 		232BD9AC212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */; };
+		23E7859E21255B31003F0C51 /* ZappAnalyticsPluginCleverTapPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD999212308A900EAF6AC /* ZappAnalyticsPluginCleverTapPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23E7859E21255B31003F0C51 /* ZappAnalyticsPluginCleverTapPlugin.swift in Sources */,
 				232BD991212308A900EAF6AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
