@@ -7,7 +7,6 @@ source 'git@github.com:applicaster/PluginsBuilderCocoaPods.git'
 source 'git@github.com:CocoaPods/Specs.git'
 
 target 'ZappAnalyticsPluginCleverTap' do
-    pod 'ZappAnalyticsPluginCleverTap', :path => 'ZappAnalyticsPluginCleverTap.podspec'
     pod 'CleverTap-iOS-SDK'
 end
 
