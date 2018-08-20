@@ -11,16 +11,9 @@ import ZappPlugins
 import ApplicasterSDK
 import CleverTapSDK
 
-/**
-This Template contains protocol methods to be implemented according to your needs.
-Some of the methods can be removed if they are not relevant for your implementation.
-You can also add methods from the protocol, for more information about the available methods, please check ZPAnalyticsProviderProtocol under ZappPlugins.
-**/
-
 public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     
     var cleverTap:CleverTap?
-    var LoginProvider: ZPLoginProviderProtocol?
     var timedEventDictionary: NSMutableDictionary?
     var userID: String?
     let eventDuration = "EVENT_DURATION"
@@ -54,9 +47,7 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     public override func shouldTrackEvent(_ eventName: String) -> Bool {
         var retVal = false
         checkUserID()
-        if let loginPlugin = getLoginPlugin() {
-           retVal = !(eventName == "Launch App") && loginPlugin.isAuthenticated()
-        }
+        retVal = !(eventName == "Launch App") && ZAAppConnector.sharedInstance().identityDelegate.isLoginPluginAuthenticated()
         return retVal
     }
     
@@ -94,18 +85,9 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     
     func checkUserID() {
         if userID == nil,
-            let activeInstance = ZPLoginManager.sharedInstance.activeInstance {
-            userID = activeInstance.getUserToken()
+            ZAAppConnector.sharedInstance().identityDelegate.isLoginPluginAuthenticated() {
+            userID = ZAAppConnector.sharedInstance().identityDelegate.getLoginPluginToken()
             CleverTap.sharedInstance().profilePush(["Identity":userID!])
         }
-    }
-    
-    func getLoginPlugin() -> ZPLoginProviderProtocol? {
-        if LoginProvider == nil {
-            if let activeInstance = ZPLoginManager.sharedInstance.activeInstance {
-                LoginProvider = activeInstance
-            }
-        }
-        return LoginProvider
     }
 }
