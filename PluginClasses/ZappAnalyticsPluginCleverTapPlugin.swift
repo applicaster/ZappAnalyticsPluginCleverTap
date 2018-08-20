@@ -20,16 +20,19 @@ You can also add methods from the protocol, for more information about the avail
 public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     
     var cleverTap:CleverTap?
+    var LoginProvider: ZPLoginProviderProtocol?
     var timedEventDictionary: NSMutableDictionary?
+    var userID: String?
     let eventDuration = "EVENT_DURATION"
     
     public override func createAnalyticsProvider(_ allProvidersSetting: [String : NSObject]) -> Bool {
-        return super.createAnalyticsProvider(allProvidersSetting)
+        let retVal = super.createAnalyticsProvider(allProvidersSetting)
+        CleverTap.autoIntegrate()
+        return retVal
     }
     
     public override func configureProvider() -> Bool {
-        CleverTap.autoIntegrate()
-        return super.configureProvider()
+        return true
     }
     
     public override func getKey() -> String {
@@ -37,25 +40,28 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     }
     
     public override func trackEvent(_ eventName: String, parameters: [String : NSObject], completion: ((Bool, String?) -> Void)?) {
-        switch eventName {
-        case "APPLICATION_STARTED":
-            break
-        default:
-            if parameters.isEmpty {
-                CleverTap.sharedInstance()?.recordEvent(eventName)
-            } else {
-                CleverTap.sharedInstance()?.recordEvent(eventName, withProps: parameters)
-            }
+        if parameters.isEmpty {
+            CleverTap.sharedInstance()?.recordEvent(eventName)
+        } else {
+            CleverTap.sharedInstance()?.recordEvent(eventName, withProps: parameters)
         }
+    }
+    
+    /*
+     Track Analytics only for authenticated users
+     Will not track the Launch App Event
+    **/
+    public override func shouldTrackEvent(_ eventName: String) -> Bool {
+        var retVal = false
+        checkUserID()
+        if let loginPlugin = getLoginPlugin() {
+           retVal = !(eventName == "Launch App") && loginPlugin.isAuthenticated()
+        }
+        return retVal
     }
     
     public override func trackEvent(_ eventName: String) {
         trackEvent(eventName, parameters: [String : NSObject](), completion: nil)
-        let components = getDateComponents()
-        if timedEventDictionary == nil {
-            timedEventDictionary = NSMutableDictionary()
-        }
-        timedEventDictionary![eventName] = components
     }
     
     public override func trackEvent(_ eventName: String, timed: Bool) {
@@ -63,21 +69,43 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     }
     
     public override func trackEvent(_ eventName: String, parameters: [String : NSObject], timed: Bool) {
-        let components = getDateComponents()
         if timedEventDictionary == nil {
             timedEventDictionary = NSMutableDictionary()
         }
-        timedEventDictionary![eventName] = components
+        timedEventDictionary![eventName] = Date()
+    }
+    
+    public override func endTimedEvent(_ eventName: String, parameters: [String : NSObject]) {
+        if let timedEventDictionary = timedEventDictionary {
+            if let startDate = timedEventDictionary[eventName] as? Date {
+                let endDate = Date()
+                let elapsed = endDate.timeIntervalSince(startDate)
+                var params = parameters.count > 0 ? parameters : [String : NSObject]()
+                let durationInMilSec = NSString(format:"%f",elapsed * 1000)
+                params[eventDuration] = durationInMilSec
+                trackEvent(eventName, parameters: params)
+            }
+        }
     }
     
     public override func trackEvent(_ eventName: String, parameters: [String : NSObject]) {
         trackEvent(eventName, parameters: parameters, completion: nil)
     }
     
-    func getDateComponents() -> DateComponents {
-        let date = Date()
-        let calendar = NSCalendar.current
-        return calendar.dateComponents([.day,.hour, .minute, .second], from: date)
+    func checkUserID() {
+        if userID == nil,
+            let activeInstance = ZPLoginManager.sharedInstance.activeInstance {
+            userID = activeInstance.getUserToken()
+            CleverTap.sharedInstance().profilePush(["Identity":userID!])
+        }
     }
     
+    func getLoginPlugin() -> ZPLoginProviderProtocol? {
+        if LoginProvider == nil {
+            if let activeInstance = ZPLoginManager.sharedInstance.activeInstance {
+                LoginProvider = activeInstance
+            }
+        }
+        return LoginProvider
+    }
 }
