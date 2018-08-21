@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "ZappAnalyticsPluginCleverTap"
-    s.version          = '4.0.0'
+    s.version          = '5.0.0'
     s.summary          = "ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS."
     s.description      = <<-DESC
                           ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS.
@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
       s.resources = []
       c.frameworks = 'UIKit','CoreTelephony','Security','SystemConfiguration','CleverTapSDK'
       c.source_files = 'PluginClasses/*.{swift,h,m}'
-      c.dependency 'ZappPlugins'
       c.dependency 'ApplicasterSDK'
       c.dependency 'CleverTap-iOS-SDK'
     end

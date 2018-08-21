@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ZappPlugins
 import ApplicasterSDK
 import CleverTapSDK
 
