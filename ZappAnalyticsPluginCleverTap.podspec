@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
       s.resources = []
       c.frameworks = 'UIKit','CoreTelephony','Security','SystemConfiguration','CleverTapSDK'
       c.source_files = 'PluginClasses/*.{swift,h,m}'
-      c.dependency 'ApplicasterSDK'
+      c.dependency 'ZappAnalyticsPluginsSDK'
       c.dependency 'CleverTap-iOS-SDK'
     end
                   

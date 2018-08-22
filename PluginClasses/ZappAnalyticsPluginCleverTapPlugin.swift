@@ -6,8 +6,8 @@
 //  Copyright © 2018 applicaster. All rights reserved.
 //
 
-import Foundation
-import ApplicasterSDK
+import ZappPlugins
+import ZappAnalyticsPluginsSDK
 import CleverTapSDK
 
 public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
