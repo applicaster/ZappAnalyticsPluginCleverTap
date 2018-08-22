@@ -14,6 +14,7 @@
 		232BD9A1212308AA00EAF6AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232BD99F212308AA00EAF6AC /* LaunchScreen.storyboard */; };
 		232BD9AC212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */; };
 		23E7859E21255B31003F0C51 /* ZappAnalyticsPluginCleverTapPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BD999212308A900EAF6AC /* ZappAnalyticsPluginCleverTapPlugin.swift */; };
+		81D6627B186AE40068EE9C9B /* Pods_ZappAnalyticsPluginCleverTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F467715F8464C12D5C4AE1F4 /* Pods_ZappAnalyticsPluginCleverTap.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,9 @@
 		232BD9A7212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZappAnalyticsPluginCleverTapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		232BD9AB212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappAnalyticsPluginCleverTapTests.swift; sourceTree = "<group>"; };
 		232BD9AD212308AA00EAF6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2B177E2508CE68B9F60CB2E /* Pods-ZappAnalyticsPluginCleverTap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappAnalyticsPluginCleverTap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZappAnalyticsPluginCleverTap/Pods-ZappAnalyticsPluginCleverTap.debug.xcconfig"; sourceTree = "<group>"; };
+		D5A125E88B9B068F84FFC1B4 /* Pods-ZappAnalyticsPluginCleverTap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappAnalyticsPluginCleverTap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZappAnalyticsPluginCleverTap/Pods-ZappAnalyticsPluginCleverTap.release.xcconfig"; sourceTree = "<group>"; };
+		F467715F8464C12D5C4AE1F4 /* Pods_ZappAnalyticsPluginCleverTap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZappAnalyticsPluginCleverTap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81D6627B186AE40068EE9C9B /* Pods_ZappAnalyticsPluginCleverTap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,12 +66,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1474765C0BF2B9A2ECECFB0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C2B177E2508CE68B9F60CB2E /* Pods-ZappAnalyticsPluginCleverTap.debug.xcconfig */,
+				D5A125E88B9B068F84FFC1B4 /* Pods-ZappAnalyticsPluginCleverTap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		232BD984212308A900EAF6AC = {
 			isa = PBXGroup;
 			children = (
 				232BD98F212308A900EAF6AC /* ZappAnalyticsPluginCleverTap */,
 				232BD9AA212308AA00EAF6AC /* ZappAnalyticsPluginCleverTapTests */,
 				232BD98E212308A900EAF6AC /* Products */,
+				1474765C0BF2B9A2ECECFB0B /* Pods */,
+				41E0EF53C4B07B35D0218DE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +137,14 @@
 			path = ZappAnalyticsPluginCleverTapTests;
 			sourceTree = "<group>";
 		};
+		41E0EF53C4B07B35D0218DE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F467715F8464C12D5C4AE1F4 /* Pods_ZappAnalyticsPluginCleverTap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,6 +152,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 232BD9B0212308AA00EAF6AC /* Build configuration list for PBXNativeTarget "ZappAnalyticsPluginCleverTap" */;
 			buildPhases = (
+				A9436C86034BD46AC2973115 /* [CP] Check Pods Manifest.lock */,
 				232BD989212308A900EAF6AC /* Sources */,
 				232BD98A212308A900EAF6AC /* Frameworks */,
 				232BD98B212308A900EAF6AC /* Resources */,
@@ -217,6 +242,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9436C86034BD46AC2973115 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZappAnalyticsPluginCleverTap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		232BD989212308A900EAF6AC /* Sources */ = {
@@ -382,6 +428,7 @@
 		};
 		232BD9B1212308AA00EAF6AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2B177E2508CE68B9F60CB2E /* Pods-ZappAnalyticsPluginCleverTap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -399,6 +446,7 @@
 		};
 		232BD9B2212308AA00EAF6AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5A125E88B9B068F84FFC1B4 /* Pods-ZappAnalyticsPluginCleverTap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
