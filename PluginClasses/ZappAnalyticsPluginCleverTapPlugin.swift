@@ -12,18 +12,20 @@ import CleverTapSDK
 
 public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
     
-    var cleverTap:CleverTap?
+    let eventDuration = "EVENT_DURATION"
+    static var isAutoIntegrated: Bool = false
     var timedEventDictionary: NSMutableDictionary?
     var userID: String?
-    let eventDuration = "EVENT_DURATION"
     
     public override func createAnalyticsProvider(_ allProvidersSetting: [String : NSObject]) -> Bool {
-        let retVal = super.createAnalyticsProvider(allProvidersSetting)
-        CleverTap.autoIntegrate()
-        return retVal
+        return super.createAnalyticsProvider(allProvidersSetting)
     }
     
     public override func configureProvider() -> Bool {
+        if !(ZappAnalyticsPluginCleverTapPlugin.isAutoIntegrated) {
+            ZappAnalyticsPluginCleverTapPlugin.isAutoIntegrated = true
+            CleverTap.autoIntegrate()
+        }
         return true
     }
     
