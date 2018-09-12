@@ -88,7 +88,7 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
         if userID == nil,
             ZAAppConnector.sharedInstance().identityDelegate.isLoginPluginAuthenticated() {
             userID = ZAAppConnector.sharedInstance().identityDelegate.getLoginPluginToken()
-            CleverTap.sharedInstance().profilePush(["Identity":userID!])
+            CleverTap.sharedInstance()?.profilePush(["Identity":userID!])
         }
     }
 }

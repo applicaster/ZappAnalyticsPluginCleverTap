@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "ZappAnalyticsPluginCleverTap"
-    s.version          = '5.0.0'
+    s.version          = '5.0.3'
     s.summary          = "ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS."
     s.description      = <<-DESC
                           ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS.
