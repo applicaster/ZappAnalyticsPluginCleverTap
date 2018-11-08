@@ -10,13 +10,13 @@ Pod::Spec.new do |s|
     s.license          = 'MIT'
     s.author           = { "Roi Kedarya" => "Roi Kedarya" }
     s.source           = { :git => "git@github.com:applicaster/ZappAnalyticsPluginCleverTap.git", :tag => s.version.to_s }
-  
+
     s.ios.deployment_target  = "9.0"
     s.platform     = :ios, '9.0'
     s.requires_arc = true
     s.swift_version = '4.2'
     s.resources = []
-                  
+
     s.xcconfig =  { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
                     'ENABLE_BITCODE' => 'YES',
                     'OTHER_LDFLAGS' => '$(inherited)',
@@ -28,6 +28,6 @@ Pod::Spec.new do |s|
     s.source_files = 'ZappAnalyticsPluginCleverTap/*.{swift,h,m}'
 
     s.dependency 'ZappAnalyticsPluginsSDK'
-    s.dependency 'CleverTap-iOS-SDK'                  
+    s.dependency 'CleverTap-iOS-SDK'
+    s.dependency 'SDWebImage'                  
   end
-  
