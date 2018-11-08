@@ -1,0 +1,484 @@
+version: 2
+notify:
+  webhooks:
+    - url: https://zapp.applicaster.com/callbacks/build_status/circleci_builds
+    - url: https://zapp-dev.herokuapp.com/callbacks/build_status/circleci_builds
+jobs:
+   build:
+     macos:
+       xcode: "10.0.0"
+     shell: /bin/bash --login -eo pipefail
+     environment:
+      - PROJECT_NAME: "Zapp-App"
+      - SCRIPTS_FOLDER: "Zapp-Scripts"
+      - BUILD_PATH: ~/build_debug
+      - SCRIPTS_LOCAL_FOLDER: "~/.scripts-iOS"
+      - SCRIPTS_REPO_PATH: "git@github.com:applicaster/Scripts-iOS.git"
+
+      #fastlane variables
+      - LC_ALL: "en_US.UTF-8"
+      - LANG: "en_US.UTF-8"
+     working_directory: ~/Zapp-iOS
+     steps:
+       # Prepare environment
+      - run:
+          name: Ruby - set version
+          command:  echo "ruby-2.4" > ~/.ruby-version
+
+      - run:
+          name: Ruby - version
+          command:  ruby -v
+
+      # Setup Homebrew
+      - restore_cache:
+          name: Homebrew - restore cache
+          key: Zapp-iOS-v6-Brew
+
+      - run:
+          name: Homebrew - prepare (brew tap)
+          command: brew tap applicaster/tap
+
+      # Prepare Node
+      - restore_cache:
+          name: Node - restore cache
+          key: Zapp-iOS-v7-Node-8.9.2
+
+      - run:
+          name: Node - install
+          no_output_timeout: 20m
+          command: |
+
+            if [ ! -d "/usr/local/Cellar/node/8.9.2" ]; then
+              echo "Not installed"
+              brew uninstall --ignore-dependencies node
+              brew install https://raw.githubusercontent.com/crazymykl/homebrew-core/9c860a427191a601df91603032f533add6a2181f/Formula/node.rb --without-icu4c
+            else
+              brew switch node 8.9.2
+              echo "Node have already installed"
+            fi
+
+      - run:
+          name: Node - version
+          command: node --version
+
+      - save_cache:
+          name: Node - save cache
+          key: Zapp-iOS-v7-Node-8.9.2
+          paths:
+            - "/usr/local/Cellar/node/8.9.2"
+
+      #Save Homebrew cache
+      - save_cache:
+          name: Homebrew - save cache
+          key: Zapp-iOS-v6-Brew
+          paths:
+            - "/usr/local/Homebrew"
+
+      # Prepere Git and Submodules
+      - restore_cache:
+          name: Git - restore cache
+          key: Zapp-iOS-v30.0-{{ .Branch }}-{{ .Revision }}-{{ .Environment.version_id }}
+          keys:
+            - Zapp-iOS-v30.0-{{ .Branch }}-{{ .Revision }}
+            - Zapp-iOS-v30.0-{{ .Branch }}-
+            - Zapp-iOS-v30.0-
+
+      - checkout
+
+      - run:
+          name: Git - checkout tag or use branch
+          command: |
+            if [ -z "$tag" ] || !(git rev-parse -q --verify "refs/tags/${tag}" >/dev/null);
+            then
+              echo "No tag available - Building current branch"
+            else
+              git fetch --tags
+              git checkout ${tag}
+            fi
+      - run:
+          name: Git - submodules update
+          command: |
+            git fetch
+            git checkout .
+            git submodule sync --recursive
+            git submodule update --init
+
+      - save_cache:
+          name: Git - save cache
+          key: Zapp-iOS-v30.0-{{ .Branch }}-{{ .Revision }}-{{ .Environment.version_id }}
+          paths:
+            - ".git"
+            - "./Submodules"
+
+      # Install ZappTool, note used to be only fixed version not latest
+      - run:
+          name: ZappTool - install
+          command: brew install zapptool/zapptool@1.11 -v
+
+      - run:
+          name: ZappTool - version
+          command: zapptool -v
+
+      # Prepare Bundler
+      - restore_cache:
+          name: Bundler - restore cache
+          key: Zapp-iOS-v6.0.1-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundler - update dependencies
+          command: bundle check --path=.bundle || bundle install --path=.bundle
+
+      - save_cache:
+          name: Bundler - save cache
+          key: Zapp-iOS-v6.0.1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - /Users/distiller/.rubies/ruby-2.4.2/lib/ruby/gems/2.4.0/gems
+            - ./.bundle
+
+      # install npm dependencies
+      - run:
+          name: NPM login
+          command: npx npm-shell-login
+
+      - restore_cache:
+          name: Restore npm dependencies
+          key: Zapp-iOS-npm-v1-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Installing NPM dependencies
+          command: yarn
+
+      - save_cache:
+          name: Saving NPM dependencies
+          key: Zapp-iOS-npm-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+
+      # Zapp Pipes bundle
+      - run:
+          name: Zapp Pipes - bundle creation
+          command: |
+            # the code below is needed for older tags which will use the latest
+            # circleCI configuration, but won't have the packager script
+            # because our CI builds use the latest CI config from the branch,
+            # then check out a tag, the following cannot be extracted to a
+            # dedicated script file
+
+            # we check if the build has a ${version_id}, if not, no need to
+            # build the zapp-pipes bundle
+            if [[ ! -z ${version_id} ]];
+            then
+
+              # First we check if the package.json file has the script
+              # We iterate through the lines of package.json and break when we
+              # find the script. If not found, read lines should match total lines
+              FILE="./package.json"
+              TOTAL_LINES=$(wc -l < $FILE)
+              LINES_READ=0
+              while read line; do
+                LINES_READ=$(($LINES_READ+1))
+                if [[ $line = *"zapp-pipes:package"* ]]
+                then
+                  break
+                fi
+              done < $FILE
+
+              # generic function to force the build to fail if
+              # the zapp pipes bundle build fails
+              function fail_build_if_needed {
+                EXIT_CODE=$?
+
+                if [[ $EXIT_CODE != 0 ]]
+                then
+                  echo "packager script failed ! stopping the build"
+                  exit $EXIT_CODE
+                fi
+              }
+
+              if [ $TOTAL_LINES != $LINES_READ ]
+              then
+                # script is defined in package.json, we use it
+                yarn zapp-pipes:package ${version_id}
+                fail_build_if_needed
+              else
+                # script is not defined in package.json, we clone the
+                # zapp-pipes-packager repo and use it
+                git clone https://github.com/applicaster/zapp-pipes-packager.git
+                cd zapp-pipes-packager
+                if [[ ! -z ${zapp_pipes_tag} ]];
+                then
+                  git fetch --tags
+                  git checkout ${zapp_pipes_tag}
+                fi
+
+                npm install
+                npm run package ${version_id}
+                fail_build_if_needed
+                cd ..
+              fi
+            else
+              echo "no version_id" - skipping build
+            fi
+
+      - run:
+          name: Scripts - Adding scripts
+          command: |
+            if [ ! -d "$SCRIPTS_LOCAL_FOLDER" ]; then
+              git clone $SCRIPTS_REPO_PATH $SCRIPTS_LOCAL_FOLDER
+            else
+              echo "Repo exists in local path: $SCRIPTS_LOCAL_FOLDER"
+              git -C $SCRIPTS_LOCAL_FOLDER fetch
+              git -C $SCRIPTS_LOCAL_FOLDER fetch --tags
+              git -C $SCRIPTS_LOCAL_FOLDER checkout
+              git -C $SCRIPTS_LOCAL_FOLDER pull origin master
+            fi
+
+            SCRIPTS_VERSION_FILENAME="ScriptsVersion"
+            SCRIPTS_REPO_VERSION="0.4.2"
+
+            if [ -e "$SCRIPTS_VERSION_FILENAME" ]; then
+                SCRIPTS_REPO_VERSION=$(head -n 1 $SCRIPTS_VERSION_FILENAME)
+            fi
+
+            git -C $SCRIPTS_LOCAL_FOLDER checkout $SCRIPTS_REPO_VERSION
+
+      # Add know host relevant for Prosieben only
+      - run:
+          name: Scripts - Add known hosts
+          command: $SCRIPTS_LOCAL_FOLDER/circleCi/addKnownHosts.sh
+
+      # Restore Cocoapods cache, save cache on lower level, after pod update
+      - restore_cache:
+          name: CocoaPods - restore cache
+          keys:
+            - Zapp-iOS-CocoaPods-1.0-{{ .Branch }}-{{ .Revision }}
+            - Zapp-iOS-CocoaPods-1.0-{{ .Branch }}-
+            - Zapp-iOS-CocoaPods-1.0-
+
+      - run:
+          name: CocoaPods - version
+          command: bundle exec pod --version
+
+      - run:
+          name: CocoaPods - pod repo update
+          command: bundle exec pod repo update
+
+      # update node and cocoapod default dependencies so that they can be cached
+      - run:
+          name: CocoaPods - update default dependencies
+          command: |
+            yarn
+            bundle exec pod update
+
+      # Cache CocoaPods
+      - save_cache:
+          name: CocoaPods - save cache
+          key: Zapp-iOS-CocoaPods-1.0-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "~/.cocoapods"
+            - "./Pods"
+
+      # Update submodule dev pod to closed version (release, master or preview branch)
+      - run:
+          name: Scripts - Update submodules dev pod to closed version
+          command: |
+            echo; echo
+            $SCRIPTS_LOCAL_FOLDER/circleCi/createClosedSubmodules.sh
+
+      # HockeyApp
+      - run:
+          name: HockeyApp - add the applicaster distribution group for to this app
+          command: |
+            applicaster_distribution_group_id=6408
+            if [ "$hockey_app_public_identifier" ];
+            then
+              echo "\nAdding Applicaster Distribution group on hockeyapp to the app (if not added before)"
+              curl -X PUT -H "X-HockeyAppToken:${HOCKEY_APP_TOKEN}" https://rink.hockeyapp.net/api/2/apps/$hockey_app_public_identifier/app_teams/$applicaster_distribution_group_id
+              echo "\n"
+            fi
+
+      - run:
+          name: ZappTool - prepare application environment
+          command: |
+            if [ "$bundle_identifier" ];
+            then
+              zapptool
+            else
+              zapptool --env .feature_app_env
+            fi
+
+      # Run node React Native
+      - run:
+          name: React Native - install npm
+          command: yarn
+
+      # Pod update
+      - run:
+          name: CocoaPods - update dependencies
+          command: bundle exec pod update --no-repo-update
+
+      # Set Xcode version
+      - run:
+          name: Current Xcode version
+          command: /usr/bin/xcodebuild -version
+
+      # Print Xcode location
+      - run:
+          name: Xcode installed location
+          command: xcode-select -p
+
+      # Tests
+      - run:
+          name: UI Tests
+          command: |
+            echo "Branch Name: $CIRCLE_BRANCH"
+            echo "Bundle Identifier: $bundle_identifier"
+
+            if [ ! -z "$CIRCLE_BRANCH" -a "$CIRCLE_BRANCH" != " " ] && [ -z "$bundle_identifier" ] && [[ $CIRCLE_BRANCH != *"-preview"* ]]; then # Don't run tests when build is from Zapp and if its preview version
+                echo "Step 1: Build app"
+                if [ $CIRCLE_BRANCH == "development" ]; then # If tests run against cloud
+                    echo "TMP CLOUD RUN DISABLE"
+                    # ./$SCRIPTS_FOLDER/add-keys.sh
+                    # ./$SCRIPTS_FOLDER/build-testing-device.sh
+                    # ./$SCRIPTS_FOLDER/remove-keys.sh
+
+                else # else, tests run against simulator
+                    ./$SCRIPTS_FOLDER/build-testing-simulator.sh
+                fi
+
+                echo "Step 2: Setup ENV params"
+                export PYTHONPATH=/Users/distiller/Zapp-iOS/ZappAutomationInfrastructure
+                APP_ACCOUNT_ID=`cat .feature_app_env | grep -m 1 "accounts_account_id=" | sed -e 's#.*=\(\)#\1#'`
+                APP_VERSION=`cat .feature_app_env | grep -m 1 "version_name=" | sed -e 's#.*=\(\)#\1#'`
+                APP_BUNDLE_ID=`cat .feature_app_env | grep -m 1 "bundle_identifier=" | sed -e 's#.*=\(\)#\1#'`
+                if [ ! $CIRCLE_BRANCH == "development" ]; then # If tests run against simulator
+                    XCODE_BUILD_LOG_PATH="`pwd`/build.log/xcodebuild.log"
+                fi
+
+                echo "Step 3: Clone tests infrastructure"
+                git clone git@github.com:applicaster/ZappAutomationInfrastructure.git
+                cd ZappAutomationInfrastructure
+
+                echo "Step 4: Setup infrastructure and libraries"
+                pip install --upgrade pip
+                ./scripts/setup.sh
+                mkdir ./logs
+                if [ ! $CIRCLE_BRANCH == "development" ]; then # If tests run against simulator
+                    # setup appium CLI tool
+                    npm install -g appium@1.9.1
+                    npm install wd
+                    # start appium server
+                    `appium >> ./logs/appium_server_log` & export APPIUM_SERVER_PID=$!
+                    sleep 2
+                fi
+
+                if [ $CIRCLE_BRANCH == "development" ]; then # If tests run against cloud
+                    echo "TMP CLOUD RUN DISABLE"
+                    # echo "Step 4.1: Upload bundle to cloud device farm repository"
+                    # target_path=PRIVATE:apps/ios/circleci/$CIRCLE_BUILD_NUM
+                    # bundle_path=/Users/distiller/Zapp-iOS/CircleArtifacts/Zapp-App-Testing.ipa
+                    # python ci/upload_bundle_to_cloud.py --bundle_path $bundle_path --target_path $target_path
+
+                    # echo "Step 4.2: Get device for the run"
+                    # CLOUD_DEVICE_ID=`python ci/prepare_device_for_run.py --platform ios`
+                    # echo "Device id for run: $CLOUD_DEVICE_ID"
+                fi
+
+                echo "Step 5: Setup config.cfg file"
+                if [ $CIRCLE_BRANCH == "development" ]; then # If tests run against cloud
+                    echo "TMP CLOUD RUN DISABLE"
+                    # python ci/create_config_cfg.py --simulator_or_device device --config_path . --platform iOS --app_version $APP_VERSION --bundle_id $APP_BUNDLE_ID --app_path $target_path/payload.ipa --device_name $CLOUD_DEVICE_ID --app_id $APP_ACCOUNT_ID
+                else
+                    bundle_path=`python ci/grep_build_path_from_build_log.py --build_log $XCODE_BUILD_LOG_PATH`
+                    python ci/create_config_cfg.py --simulator_or_device simulator --config_path . --platform iOS  --app_version $APP_VERSION --app_id $APP_ACCOUNT_ID  --bundle_id $APP_BUNDLE_ID --app_path $bundle_path
+                    zip -r ./payload.zip $bundle_path
+                    mv ./payload.zip ./logs/payload.ipa
+                fi
+
+                if [ -f config.cfg ]; then
+                    echo "config.cfg file for tests run:"
+                    echo "----------------(config.cfg start)----------------"
+                    cat config.cfg
+                    echo "----------------(config.cfg end)----------------"
+                fi
+
+                echo "Step 6: Run tests"
+                if [ ! $CIRCLE_BRANCH == "development" ]; then
+                    python tests/feature_app/example_test.py
+                fi
+
+                if [ ! $CIRCLE_BRANCH == "development" ]; then # If tests run against simulator
+                    echo "Step 7: Stop appium server"
+                    kill -9 $APPIUM_SERVER_PID # kill appium server process
+                fi
+            else
+                echo "Tests will not be started - bundle_identifier exists. It means that build from Zapp. Debug or Store"
+            fi
+
+      - store_artifacts:
+          name: Artifacts - collecting UI tests results
+          path: ZappAutomationInfrastructure/logs
+
+      - deploy:
+          name: Building Zapp-App - appStore build
+          command: |
+                if [ -z "$distribution_key_url" ];
+                then
+                  echo "No Distribution Key. Store version will be skipped."
+                else
+                  ./$SCRIPTS_FOLDER/add-keys.sh
+                  ruby ./$SCRIPTS_FOLDER/change-push-notifications-value.rb 0 1
+
+                  echo "-s--- adding fastlane-credentials"
+                  fastlane fastlane-credentials add --username $itunes_connect_user --password $itunes_connect_password
+                  echo "-e--- adding fastlane-credentials"
+
+                  echo "\nStarting build store\n"
+                  ./$SCRIPTS_FOLDER/build-store.sh
+                  ruby ./$SCRIPTS_FOLDER/change-push-notifications-value.rb 1 0
+                  ./$SCRIPTS_FOLDER/remove-keys.sh
+                fi
+
+      - deploy:
+          name: Building Zapp-App - enterprise build
+          command: |
+            if [ -z "$bundle_identifier" ];
+            then
+              echo "Bundle identifier NOT set! Enterprise Build will be skipped"
+            else
+              ./$SCRIPTS_FOLDER/add-keys.sh
+              ./$SCRIPTS_FOLDER/build-enterprise.sh
+              ./$SCRIPTS_FOLDER/remove-keys.sh
+            fi
+
+      - deploy:
+          name: Creating Zapp SDK
+          command: |
+            if [ "$triggered_by" = "zapp" ];
+            then
+              echo "Skipping SDK creation"
+            else
+              if [ -z "$CIRCLE_TAG" ];
+              then
+                echo "no tag passing branch name"
+                version=$CIRCLE_BRANCH
+              else
+                version=$CIRCLE_TAG
+              fi
+
+              bundle exec rake zapp_sdks:create[ios,$version,$CIRCLE_PROJECT_REPONAME]
+              bundle exec rake zapp_sdks:publish_changelog[ios,$version]
+            fi
+
+      - store_artifacts:
+          name: Artifacts - collecting
+          path: ./CircleArtifacts
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^[0-9]+[.][0-9]+[.][0-9]+$/
