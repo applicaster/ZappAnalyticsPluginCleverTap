@@ -6,8 +6,8 @@ source 'git@github.com:applicaster/CocoaPods.git'
 source 'git@github.com:applicaster/PluginsBuilderCocoaPods.git'
 source 'git@github.com:CocoaPods/Specs.git'
 
-target 'ZappAnalyticsPluginCleverTap' do
-
+target 'ZappAnalyticsPluginCleverTapDemoApp' do
+  pod 'ZappAnalyticsPluginCleverTap', :path => 'ZappAnalyticsPluginCleverTap.podspec'
 end
 
 post_install do |installer|
@@ -22,4 +22,3 @@ pre_install do |installer|
     # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
     Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
 end
-
