@@ -25,6 +25,7 @@ public class ZappAnalyticsPluginCleverTapPlugin: ZPAnalyticsProvider {
         if !(ZappAnalyticsPluginCleverTapPlugin.isAutoIntegrated) {
             ZappAnalyticsPluginCleverTapPlugin.isAutoIntegrated = true
             CleverTap.autoIntegrate()
+            checkUserID()
         }
         return true
     }

@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ZappAnalyticsPluginCleverTap
+//  ZappAnalyticsPluginCleverTapDemoApp
 //
-//  Created by Roi Kedarya on 14/08/2018.
+//  Created by Jesus De Meyer on 11/8/18.
 //  Copyright © 2018 applicaster. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }
