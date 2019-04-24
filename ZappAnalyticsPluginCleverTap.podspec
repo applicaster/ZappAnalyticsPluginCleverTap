@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "ZappAnalyticsPluginCleverTap"
-    s.version          = '5.0.3'
+    s.version          = '6.0.0'
     s.summary          = "ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS."
     s.description      = <<-DESC
                           ZappAnalyticsPluginCleverTap analytics plugin for Zapp iOS.
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
     s.author           = { "Roi Kedarya" => "Roi Kedarya" }
     s.source           = { :git => "git@github.com:applicaster/ZappAnalyticsPluginCleverTap.git", :tag => s.version.to_s }
   
-    s.ios.deployment_target  = "9.0"
-    s.platform     = :ios, '9.0'
+    s.ios.deployment_target  = "10.0"
+    s.platform     = :ios, '10.0'
     s.requires_arc = true
     s.swift_version = '4.1'
 
